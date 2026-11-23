@@ -1,0 +1,305 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RecallRocket — Learn smarter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-card">
+    <div class="login-logo">
+      <span>✦</span>
+      Recall<span>Rocket</span>
+    </div>
+
+    <h1>Welcome back!</h1>
+    <p class="login-subtitle">Sign in to continue your learning journey.</p>
+
+    <form id="loginForm">
+      <label for="loginEmail">Email address</label>
+      <input
+        type="email"
+        id="loginEmail"
+        placeholder="Enter your email"
+        required
+      >
+
+      <label for="loginPassword">Password</label>
+      <div class="password-wrapper">
+        <input
+          type="password"
+          id="loginPassword"
+          placeholder="Enter your password"
+          minlength="4"
+          required
+        >
+        <button type="button" id="togglePassword">Show</button>
+      </div>
+
+      <p id="loginError" class="login-error"></p>
+
+      <button type="submit" class="login-submit">
+        Sign in →
+      </button>
+    </form>
+
+    <p class="login-footer">
+      Your learning journey starts here ✨
+    </p>
+  </div>
+</div>
+<!-- END LOGIN SCREEN -->
+
+  <aside class="sidebar">
+    <a class="logo" href="#"><span class="logo-mark">✦</span><span>Recall<span class="logo-accent">Rocket</span></span></a>
+    <p class="side-label">WORKSPACE</p>
+    <button class="side-link active" data-page="dashboard"><span>▦</span> Dashboard</button>
+    <button class="side-link" data-page="study"><span>▣</span> Study session</button>
+    <button class="side-link" data-page="decks"><span>▤</span> My flashcards</button>
+    <button class="side-link" data-page="leaderboard"><span>♜</span> Leaderboard</button>
+    <div class="sidebar-bottom">
+      <div class="upgrade-card">
+        <div class="upgrade-icon">✧</div>
+        <b>Small steps, big memory.</b>
+        <p>Build a daily learning habit and keep your knowledge growing.</p>
+        <button id="startFromSide">Start learning →</button>
+      </div>
+      <button class="side-link" id="themeBtn"><span>◐</span> Toggle appearance</button>
+      <div class="profile">
+        <div class="avatar">S</div>
+        <div><b>Student</b><small>Learning account</small></div>
+        <span class="profile-dot"></span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">WEDNESDAY, YOUR LEARNING DAY</p>
+        <h1 id="pageTitle">Your learning dashboard</h1>
+      </div>
+      <div class="top-actions">
+        <div class="streak-chip">🔥 <b id="streakValue">0</b><span>day streak</span></div>
+        <button class="round-btn" id="quickAdd" title="Add flashcard">＋</button>
+      </div>
+    </header>
+
+    <section id="dashboardPage" class="page">
+      <div class="welcome-banner">
+        <div>
+          <span class="banner-tag">YOUR DAILY KNOWLEDGE BOOST</span>
+          <h2>Make every minute<br>of learning <em>count.</em></h2>
+          <p>Review a little today. Remember a lot tomorrow.</p>
+          <button class="white-btn" data-open="study">Continue studying <span>→</span></button>
+        </div>
+        <div class="banner-art">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="book-emoji">📚</div>
+          <div class="floating-note note-one">+ Focus</div>
+          <div class="floating-note note-two">✦ Remember</div>
+          <div class="spark spark-one">✦</div>
+          <div class="spark spark-two">✧</div>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <div><p class="eyebrow">YOUR OVERVIEW</p><h2>Study at a glance</h2></div>
+        <span class="muted tiny">Your progress is saved on this device</span>
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-top"><span class="stat-icon purple">▣</span><span class="trend">Today</span></div>
+          <strong id="dueStat">0</strong><p>Cards due today</p>
+          <div class="mini-bar"><i id="dueBar"></i></div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span class="stat-icon orange">🔥</span><span class="trend">Consistency</span></div>
+          <strong id="streakStat">0 days</strong><p>Current study streak</p>
+          <div class="mini-bar orange-bar"><i id="streakBar"></i></div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span class="stat-icon green">✓</span><span class="trend">All time</span></div>
+          <strong id="reviewStat">0</strong><p>Cards reviewed</p>
+          <div class="mini-bar green-bar"><i id="reviewBar"></i></div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span class="stat-icon blue">✧</span><span class="trend">Your score</span></div>
+          <strong id="pointsStat">0</strong><p>Memory points</p>
+          <div class="mini-bar blue-bar"><i id="pointsBar"></i></div>
+        </article>
+      </div>
+
+      <div class="content-grid">
+        <section class="panel focus-panel">
+          <div class="panel-heading">
+            <div><p class="eyebrow">READY WHEN YOU ARE</p><h2>Today's focus</h2></div>
+            <span class="soft-pill" id="duePill">0 waiting</span>
+          </div>
+          <div class="focus-content">
+            <div class="focus-illustration">🎯</div>
+            <div>
+              <h3 id="focusTitle">Your next breakthrough starts here</h3>
+              <p id="focusText">You have no cards waiting. Add flashcards to start building your memory.</p>
+              <button class="primary-btn" data-open="study">Open study session <span>→</span></button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel activity-panel">
+          <div class="panel-heading">
+            <div><p class="eyebrow">KEEP SHOWING UP</p><h2>Weekly activity</h2></div>
+            <span class="soft-pill">Last 7 days</span>
+          </div>
+          <div class="week-chart" id="weekChart"></div>
+          <div class="chart-foot">
+            <span><i class="legend-dot"></i> Cards reviewed</span>
+            <b id="weekTotal">0 reviews this week</b>
+          </div>
+        </section>
+      </div>
+
+      <section class="panel deck-preview">
+        <div class="panel-heading">
+          <div><p class="eyebrow">PICK UP WHERE YOU LEFT OFF</p><h2>Your study decks</h2></div>
+          <button class="text-btn" data-open="decks">View all decks →</button>
+        </div>
+        <div class="preview-grid" id="previewDecks"></div>
+      </section>
+    </section>
+
+    <section id="studyPage" class="page hidden">
+      <div class="study-intro">
+        <div>
+          <p class="eyebrow">FOCUS MODE</p>
+          <h2>One card at a time.</h2>
+          <p class="muted">Think of the answer, flip the card, then rate your recall honestly.</p>
+        </div>
+        <div class="soft-pill" id="studyCount">0 cards due</div>
+      </div>
+
+      <div class="study-stage">
+        <div class="flashcard" id="flashcard" tabindex="0" role="button" aria-label="Flashcard. Press space to flip.">
+          <div class="face front">
+            <span class="card-kicker">QUESTION <span id="cardNumber">01</span></span>
+            <span class="deck-name" id="cardDeck">Algorithms</span>
+            <h2 id="questionText">What is the question?</h2>
+            <div class="card-bottom"><span>Recall it before revealing</span><span>Click to flip ↻</span></div>
+          </div>
+          <div class="face back">
+            <span class="card-kicker">ANSWER</span>
+            <h2 id="answerText">The answer appears here.</h2>
+            <div class="card-bottom"><span>You've got this</span><span>Rate your recall below</span></div>
+          </div>
+        </div>
+
+        <div class="rating-area">
+          <p class="eyebrow">HOW WELL DID YOU REMEMBER?</p>
+          <h3>Rate your recall</h3>
+          <p class="muted tiny">0 = Not remembered · 5 = Perfect recall</p>
+          <div class="rating-buttons">
+            <button data-grade="0"><b>0</b><span>Again</span></button>
+            <button data-grade="1"><b>1</b><span>Very hard</span></button>
+            <button data-grade="2"><b>2</b><span>Hard</span></button>
+            <button data-grade="3"><b>3</b><span>Good</span></button>
+            <button data-grade="4"><b>4</b><span>Easy</span></button>
+            <button data-grade="5"><b>5</b><span>Perfect</span></button>
+          </div>
+          <p class="keyboard-hint">⌨ Space to flip · Press 0–5 to rate</p>
+          <div class="schedule-message" id="scheduleMessage">Flip the card to reveal the answer.</div>
+        </div>
+      </div>
+
+      <div class="empty-panel hidden" id="studyEmpty">
+        <div>🎉</div>
+        <h2>You're all caught up!</h2>
+        <p>No flashcards are due today. Enjoy your progress or add more cards to a deck.</p>
+        <button class="primary-btn" data-open="decks">Explore your decks →</button>
+      </div>
+    </section>
+
+    <section id="decksPage" class="page hidden">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">YOUR PERSONAL LIBRARY</p>
+          <h2>All study decks</h2>
+          <p class="muted">Organize what you're learning, one deck at a time.</p>
+        </div>
+        <button class="primary-btn" id="newDeckBtn">＋ Create a deck</button>
+      </div>
+      <div class="deck-grid" id="deckGrid"></div>
+      <div class="panel import-panel">
+        <div><h3>Bring your cards with you</h3><p class="muted">Import or export your flashcards as a CSV file.</p></div>
+        <div>
+          <button class="secondary-btn" id="exportBtn">↓ Export CSV</button>
+          <label class="secondary-btn file-label">↑ Import CSV<input type="file" id="importFile" accept=".csv" hidden></label>
+        </div>
+      </div>
+    </section>
+
+    <section id="leaderboardPage" class="page hidden">
+      <div class="section-head">
+        <div><p class="eyebrow">CAMPUS CHALLENGE</p><h2>Leaderboard</h2><p class="muted">A little friendly motivation for your learning journey.</p></div>
+        <span class="soft-pill">Demo cohort</span>
+      </div>
+      <div class="leaderboard-hero">
+        <div>
+          <p class="eyebrow">KNOWLEDGE IS YOUR SUPERPOWER</p>
+          <h2>Keep learning.<br><em>Keep climbing.</em></h2>
+          <p>Your points grow every time you complete a review.</p>
+        </div>
+        <div class="trophy">🏆</div>
+      </div>
+      <div class="panel table-panel">
+        <div class="panel-heading">
+          <div><p class="eyebrow">THIS WEEK'S LEARNERS</p><h2>Top students</h2></div>
+          <span class="soft-pill">By memory points</span>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>RANK</th><th>STUDENT</th><th>REVIEWS</th><th>STREAK</th><th>POINTS</th></tr></thead>
+            <tbody id="leaderboardRows"></tbody>
+          </table>
+        </div>
+        <p class="muted tiny note">Demo rankings are sample data. A real campus leaderboard needs a shared backend and student accounts.</p>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="deckDialog">
+    <form id="deckForm">
+      <div class="dialog-head"><h2>Create a study deck</h2><button type="button" class="close-btn" data-close="deckDialog">×</button></div>
+      <label>Deck name<input id="deckName" required maxlength="50" placeholder="e.g. Data Structures"></label>
+      <label>Short description<input id="deckDescription" maxlength="100" placeholder="What are you learning?"></label>
+      <div class="dialog-actions">
+        <button type="button" class="secondary-btn" data-close="deckDialog">Cancel</button>
+        <button class="primary-btn">Create deck</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="cardDialog">
+    <form id="cardForm">
+      <div class="dialog-head"><h2>Add a flashcard</h2><button type="button" class="close-btn" data-close="cardDialog">×</button></div>
+      <input id="targetDeck" type="hidden">
+      <label>Question<textarea id="newQuestion" required rows="3" placeholder="Write your question..."></textarea></label>
+      <label>Answer<textarea id="newAnswer" required rows="4" placeholder="Write the answer..."></textarea></label>
+      <div class="dialog-actions">
+        <button type="button" class="secondary-btn" data-close="cardDialog">Cancel</button>
+        <button class="primary-btn">Save flashcard</button>
+      </div>
+      
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+<div class="profile"></div>
+</body>
+</html>
